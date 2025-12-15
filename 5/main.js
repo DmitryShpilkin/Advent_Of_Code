@@ -1,4 +1,5 @@
-/*import fs from 'fs';
+/*
+import fs from 'fs';
 
 // Читаем файл (замени 'database.txt' на свой файл)
 const data = fs.readFileSync('input.txt', 'utf-8').trim();
@@ -21,7 +22,8 @@ function isFresh(id) {
 // Считаем количество свежих
 const freshCount = available.filter(isFresh).length;
 
-console.log('Количество свежих ингредиентов:', freshCount);*/
+console.log('Количество свежих ингредиентов:', freshCount);
+*/
 
 
 

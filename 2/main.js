@@ -1,4 +1,5 @@
-/*const fs = require("fs");
+/*
+const fs = require("fs");
 
 // Читаем файл с диапазонами
 const data = fs.readFileSync("input.txt", "utf-8").trim();
@@ -32,7 +33,10 @@ for (const range of ranges) {
     }
 }
 
-console.log("Сумма недействительных идентификаторов:", sum);*/
+console.log("Сумма недействительных идентификаторов:", sum);
+*/
+
+
 
 const fs = require("fs");
 

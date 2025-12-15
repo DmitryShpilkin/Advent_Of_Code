@@ -1,4 +1,5 @@
-/*import fs from 'fs';
+/*
+import fs from 'fs';
 
 // Читаем файл
 const data = fs.readFileSync('input.txt', 'utf-8');
@@ -41,83 +42,64 @@ const results = tasks.map((numbers, idx) => {
 // Суммируем все результаты
 const total = results.reduce((a, b) => a + b, 0);
 
-console.log(total);*/
+console.log(total);
+*/
 
 
 
-const fs = require('fs');
+const fs = require('fs'); // Подключаем модуль файловой системы Node.js
 
-function solveCephalopodMath(filename) {
-    // Загружаем данные из файла
-    const data = fs.readFileSync(filename, 'utf-8');
-    const lines = data.trim().split('\n');
-    
-    // Определяем количество столбцов
-    const maxLength = Math.max(...lines.map(line => line.length));
-    
-    // Разбиваем на отдельные задачи (разделитель - столбец из пробелов)
-    const problems = [];
-    let currentProblem = [];
-    
-    for (let col = maxLength - 1; col >= 0; col--) {
-        const column = lines.map(line => line[col] || ' ');
-        
-        // Проверяем, является ли столбец разделителем (только пробелы)
-        const isEmptyColumn = column.every(char => char === ' ' || char === undefined);
-        
-        if (isEmptyColumn) {
-            if (currentProblem.length > 0) {
-                problems.push(currentProblem);
-                currentProblem = [];
+// Путь к файлу с данными
+const filePath = './input.txt'; // Здесь указываем полный путь к файлу
+
+// Функция для парсинга входных данных
+function parseInput(data) {
+    const rows = data.split('\n').filter(line => line.trim() !== '');
+    const opsRow = rows.pop(); // Извлекаем строку с операторами
+    const numRows = rows.map(row => row.trim().split(/\s+/)).reverse();
+
+    // Создаем массив номеров задач
+    const tasks = [];
+    for (let j = 0; j < numRows[0].length; j++) {
+        const taskNum = [];
+        for (let i = 0; i < numRows.length; i++) {
+            const cellValue = numRows[i][j];
+            if (cellValue && !isNaN(parseInt(cellValue))) {
+                taskNum.unshift(cellValue.padStart(numRows.length, ' ').replace(/ /g, ''));
             }
-        } else {
-            currentProblem.push(column);
         }
+        tasks.push(taskNum.join(''));
     }
-    
-    // Добавляем последнюю задачу
-    if (currentProblem.length > 0) {
-        problems.push(currentProblem);
-    }
-    
-    // Решаем каждую задачу
-    const results = [];
-    
-    for (const problem of problems) {
-        // Последний столбец содержит оператор
-        const operatorColumn = problem[problem.length - 1];
-        const operator = operatorColumn.find(c => ['+','*'].includes(c));
 
-        
-        // Остальные столбцы содержат числа
-        const numbers = [];
-        
-        for (let i = 0; i < problem.length - 1; i++) {
-            const numStr = problem[i].filter(char => char !== ' ').join('');
-            if (/^\d+$/.test(numStr)) {
-    numbers.push(Number(numStr));
+    return {tasks, operators: opsRow.split(/\s+/)};
 }
 
+// Функция для выполнения операций
+function computeTasks(tasks, operators) {
+    let result = 0;
+    for (let i = 0; i < tasks.length; i++) {
+        const nums = tasks[i].split(' ');
+        switch (operators[i]) {
+            case '+':
+                result += nums.reduce((a, b) => a + Number(b), 0);
+                break;
+            case '*':
+                result += nums.reduce((a, b) => a * Number(b), 1);
+                break;
         }
-        
-        // Вычисляем результат
-        let result;
-        if (operator === '+') {
-            result = numbers.reduce((sum, num) => sum + num, 0);
-        } else if (operator === '*') {
-            result = numbers.reduce((prod, num) => prod * num, 1);
-        }
-        
-        results.push(result);
-        console.log(`Задача: ${numbers.join(` ${operator} `)} = ${result}`);
     }
-    
-    // Считаем общую сумму
-    const totalSum = results.reduce((sum, val) => sum + val, 0);
-    
-    console.log(`\nОбщая сумма: ${totalSum}`);
-    return totalSum;
+    return result;
 }
 
-// Использование
-solveCephalopodMath('input.txt');
+// Основной обработчик
+async function main() {
+    try {
+        const rawData = await fs.promises.readFile(filePath, 'utf8');
+        const {tasks, operators} = parseInput(rawData);
+        console.log(computeTasks(tasks, operators));
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+main();

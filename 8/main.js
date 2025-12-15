@@ -1,5 +1,4 @@
 /*
-
 const fs = require('fs');
 const path = process.argv[2] || 'input.txt';
 const K = 1000; // количество самых коротких соединений
@@ -143,10 +142,6 @@ console.log('Произведение их размеров:', prod.toString());
 
 
 
-
-// last_union.js
-// Usage: node last_union.js [input-file]
-// Default input-file: input.txt
 
 const fs = require('fs');
 const file = process.argv[2] || 'input.txt';

@@ -1,4 +1,5 @@
-/*const fs = require('fs');
+/*
+const fs = require('fs');
 
 function maxVoltageForBlock(block) {
     const digits = block.split('').map(Number);
@@ -38,7 +39,8 @@ const input = fs.readFileSync('input.txt', 'utf8')
 console.log("Максимальные напряжения по блокам:");
 input.forEach(b => console.log(b, "→", maxVoltageForBlock(b)));
 
-console.log("\nОбщее напряжение:", totalMaxVoltage(input));*/
+console.log("\nОбщее напряжение:", totalMaxVoltage(input));
+*/
 
 
 

@@ -1,6 +1,3 @@
-// count_accessible.js
-// Usage: node count_accessible.js path/to/file.txt
-// If no path given, will try ./input.txt
 /*
 const fs = require('fs');
 const path = process.argv[2] || 'input.txt';
@@ -68,9 +65,6 @@ console.log(accessibleCount);
 
 
 
-// remove_iterative.js
-// Usage: node remove_iterative.js [path/to/input.txt] [--show-final]
-// Example: node remove_iterative.js input.txt --show-final
 
 const fs = require('fs');
 const path = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : 'input.txt';

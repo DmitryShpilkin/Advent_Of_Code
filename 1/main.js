@@ -1,4 +1,5 @@
-/*const fs = require('fs');
+/*
+const fs = require('fs');
 
 function countZeroStops(moves) {
   let position = 50;
@@ -28,7 +29,8 @@ const text = fs.readFileSync('input.txt', 'utf-8');
 const moves = text.trim().split(/\r?\n/);
 
 const result = countZeroStops(moves);
-console.log("Пароль:", result);*/
+console.log("Пароль:", result);
+*/
 
 
 const fs = require('fs');

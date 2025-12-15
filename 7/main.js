@@ -1,4 +1,5 @@
-/*const fs = require("fs");
+/*
+const fs = require("fs");
 
 const grid = fs.readFileSync("input.txt", "utf8")
   .trim()
@@ -38,11 +39,12 @@ for (let r = 0; r < H - 1; r++) {
     beams = [...nextBeams];
 }
 
-console.log("Количество разветвлений:", splits);*/
+console.log("Количество разветвлений:", splits);
+*/
 
 
 
-// quantum-tachyons.js
+
 const fs = require('fs');
 
 const raw = fs.readFileSync('input.txt', 'utf8').replace(/\r/g,'').split('\n').filter(Boolean);
